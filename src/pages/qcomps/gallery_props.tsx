@@ -5,7 +5,7 @@ function ListItem({label,content}:ListItemProps) {
   return (
     <li>
     <b>{label}</b>
-    ({content})
+    <p>{content}</p>
     </li>
   );
 }
@@ -24,7 +24,7 @@ function Profile(props: GalleryProps) {
       />
     <ul>
       <ListItem label="Profession: " content={scientist.profession}/>
-      <ListItem label={"Awards: "+scientist.awards.length} content={scientist.awards} />
+      <ListItem label={"Awards: "+ scientist.awards.match(/\(([^)]+)\)/)?.[1].split(",").length.toString() || ""} content={scientist.awards} />
       <ListItem label={"Discovered: "} content={scientist.discovery} />
     </ul>
   </section>
