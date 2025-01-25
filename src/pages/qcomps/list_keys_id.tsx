@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -17,7 +19,10 @@ function getImageUrl(imageId: string) {
 }
 export default function List() {
   const listItems = people.map(person =>
-    <li>
+    <li key={person.id}>
+      <img 
+      src={getImageUrl(person.imageId)}
+      />
     </li>
   );
   return <ul>{listItems}</ul>;

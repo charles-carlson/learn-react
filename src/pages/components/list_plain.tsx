@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 const people = [
   'Creola Katherine Johnson: mathematician',
   'Mario J osé Molina-Pasquel Henríquez: chemist',
@@ -7,8 +8,8 @@ const people = [
 ];
 
 export default function List() {
-  const listItems = people.map(person =>
-    <li>{person}</li>
+  const listItems = people.map(person => 
+   <li>{person}</li>
   );
   return <ul>{listItems}</ul>;
 }
