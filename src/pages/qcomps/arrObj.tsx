@@ -1,13 +1,29 @@
 import { useState } from 'react';
 import { ItemListProps } from '../../types/arrObj';
-
 let nextId = 3;
-const initialList = [
+
+type ArtWorkListType = {
+  id:number,
+  title: string,
+  seen: boolean
+}
+const initialList:ArtWorkListType[] = [
   { id: 0, title: 'Big Bellies', seen: false },
   { id: 1, title: 'Lunar Landscape', seen: false },
   { id: 2, title: 'Terracotta Army', seen: true },
 ];
 
+// function toggleList(aList:ArtWorkListType[],artWorkid:number,nextSeen:boolean){
+//     return aList.map(e=>{
+//       if(e.id == artWorkid){
+//         e.seen = nextSeen;
+//         return {...e,seen:nextSeen}
+//       }
+//       else{
+//         return e;
+//       }
+//     })
+// }
 /**
  * The component renders two lists of artworks, each with a checkbox to mark the artwork as seen.
  * However, the lists are coupled, that is, checking a box in one list will also check the box in the other list.
@@ -16,7 +32,7 @@ const initialList = [
 export default function BucketList() {
   const [myList, setMyList] = useState(initialList);
   const [yourList, setYourList] = useState(
-    initialList
+    [...initialList].map(o=>{return {id:o.id+nextId,title:o.title,seen:o.seen}})
   );
 
   /**
@@ -25,6 +41,7 @@ export default function BucketList() {
    * @param nextSeen - the value with which to update the seen property of the artwork
    */
   function handleToggleMyList(artworkId: number, nextSeen: boolean) {
+    //const tmpList = toggleList(myList,artworkId,nextSeen)
     const tmpList = myList.map(e => {
         if (e.id === artworkId) {
             e.seen = nextSeen
@@ -40,6 +57,7 @@ export default function BucketList() {
    * @param nextSeen - the value with which to update the seen property of the artwork
    */
   function handleToggleYourList(artworkId: number, nextSeen: boolean) {
+    //const tmpList = toggleList(yourList,artworkId,nextSeen)
     const tmpList = yourList.map(e => {
         if (e.id === artworkId) {
             e.seen = nextSeen
@@ -74,6 +92,7 @@ function ItemList({ artworks, onToggle }: ItemListProps) {
               type="checkbox"
               checked={artwork.seen}
               onChange={e => {
+                //const a = [...artworks].splice(artwork.id,1)[0]
                 onToggle(
                   artwork.id,
                   e.target.checked

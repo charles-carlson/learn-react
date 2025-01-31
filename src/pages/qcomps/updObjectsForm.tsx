@@ -13,18 +13,27 @@ export default function Scoreboard() {
   });
 
   function handlePlusClick() {
-    player.likescore++;
+    const p = {
+      ...player,
+      likescore:player.likescore + 1
+    };
+    setPlayer(p)
   }
 
   function handleFirstNameChange(e: { target: { value: string; }; }) {
-    setPlayer({
+    const p = {
       ...player,
-      firstName: e.target.value,
-    });
+      firstName:e.target.value,
+    }
+    setPlayer(p);
   }
 
   function handleLastNameChange(e: { target: { value: string; }; }) {
-    player.lastName = e.target.value;
+    const p = {
+      ...player,
+      lastName: e.target.value,
+    }
+    setPlayer(p);
   }
 
   return (
