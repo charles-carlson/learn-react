@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import { sculptureList } from '../../data/data';
-
+import {useState} from 'react'
+import {sculptureList} from '../../data/data'
 /**
  * The Gallery component displays a sculpture from the sculptureList array.
  * The component has a bug that causes the component to crash with a runtime error.
@@ -20,7 +19,12 @@ export default function Gallery() {
    * The handleNextClick function increments the index state variable to display the next sculpture.
    */
   function handleNextClick() {
-    setIndex(index + 1);
+    if(index + 1 >= sculptureList.length){
+        setIndex(0)
+    }
+    else{
+        setIndex(index + 1);
+    }
   }
 
   /**
